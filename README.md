@@ -2,6 +2,11 @@
 『스프링 마이크로서비스 코딩 공작소(개정 2판)』를 기반으로, MSA 구조를 실습하며 주문/상품 서비스를 구현한 프로젝트
 
 ---
+## 🏦 아키텍처
+![msa drawio](https://github.com/user-attachments/assets/1e7d4eb7-441c-4c93-8563-3976bf4337c8)
+
+
+---
 ## 📦 프로젝트 구조
 ```
 msa-service/
