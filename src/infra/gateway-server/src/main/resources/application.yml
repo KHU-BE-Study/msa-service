@@ -1,6 +1,54 @@
 server:
   port: 8080
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
 spring:
   application:
     name: gateway-server
+  main:
+    web-application-type: reactive # WebFlux + Spring Web 함께 사용
+
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 모든 요청에 대해 CORS 적용
+            allowedOrigins:
+
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders: "*"
+
+      discovery:
+        locator:
+          enabled: true # 서비스 디스커버리를 통해 동적으로 라우트를 생성하도록 설정
+          lower-case-service-id: true # serviceId를 소문자로 관리
+
+      routes:
+        # Product Server 라우팅
+        - id: product-server
+          uri: lb://product-server
+          predicates:
+            - Path=/product-server/**
+          filters:
+            - StripPrefix=1
+
+        # Order Server 라우팅
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/order-server/**
+          filters:
+            - StripPrefix=1
