@@ -27,7 +27,6 @@ public class OrderServiceImpl implements OrderService {
 	public OrderDetailResponse createOrder(OrderRequest request) {
 
 		Order order = new Order();
-		order.setOrderId(UUID.randomUUID());
 		order.setUserId(request.getUserId());
 		order.setStatus(OrderStatus.PENDING);
 		order.setOrderTime(LocalDateTime.now());
@@ -35,7 +34,6 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDetail> details = request.getProducts().stream()
 			.map(p -> {
 				OrderDetail detail = new OrderDetail();
-				detail.setDetailId(UUID.randomUUID());
 				detail.setOrder(order);
 				detail.setProductId(p.getProductId());
 				detail.setQuantity(p.getQuantity());
