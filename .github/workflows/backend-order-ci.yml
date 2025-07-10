@@ -14,7 +14,7 @@ jobs:
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      SERVER_NAME: main
+      SERVER_NAME: order-service
       DOCKERFILE_DIR: src/backend/order-server
 
     steps:
