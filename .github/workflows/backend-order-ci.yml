@@ -3,10 +3,10 @@ name: CI for Order Server
 on:
   push:
     branches:
-      - be/order-*
+      - be/order-**
   pull_request:
     branches:
-      - be/order-*
+      - be/order-**
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
