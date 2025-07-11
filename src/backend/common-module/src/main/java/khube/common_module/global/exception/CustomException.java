@@ -1,13 +1,20 @@
 package khube.common_module.global.exception;
 
-import lombok.Getter;
+import khube.common_module.global.status.ErrorStatus;
 
-@Getter
 public class CustomException extends RuntimeException {
-	private final ErrorCode errorCode;
+	private final ErrorStatus errorCode;
 
-	public CustomException(ErrorCode errorCode) {
+	public CustomException(ErrorStatus errorCode) {
 		super(errorCode.getMessage());
 		this.errorCode = errorCode;
+	}
+
+	public String getCode() {
+		return errorCode.getCode();
+	}
+
+	public ErrorStatus getErrorCode() {
+		return errorCode;
 	}
 }
