@@ -1,0 +1,40 @@
+name: CI for Order Server
+
+on:
+  push:
+    branches:
+      - be/order-**
+  pull_request:
+    branches:
+      - be/order-**
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SERVER_NAME: order-service
+      DOCKERFILE_DIR: src/backend/order-server
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ env.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.SERVER_NAME }}:latest \
+            -f ${{ env.DOCKERFILE_DIR }}/Dockerfile ${{ env.DOCKERFILE_DIR }}
+          docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.SERVER_NAME }}:latest
