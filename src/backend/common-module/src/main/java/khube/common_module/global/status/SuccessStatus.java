@@ -1,5 +1,8 @@
 package khube.common_module.global.status;
 
+import lombok.Getter;
+
+@Getter
 public enum SuccessStatus {
     OK("200", "Successed"),
     CREATED("201", "Create user"),
@@ -11,8 +14,5 @@ public enum SuccessStatus {
         this.code = code;
         this.message = message;
     }
-
-    public String getCode() { return code; }
-    public String getMessage() { return message; }
 
 }
