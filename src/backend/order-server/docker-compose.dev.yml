@@ -1,0 +1,23 @@
+services:
+
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: order-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/msa_service
+      SPRING_DATASOURCE_USERNAME: khube
+      SPRING_DATASOURCE_PASSWORD: khube
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    ports:
+      - "18080:8080"
+    networks:
+      - khube-network
+
+networks:
+  khube-network:
+    name: khube-network
+    external: true
