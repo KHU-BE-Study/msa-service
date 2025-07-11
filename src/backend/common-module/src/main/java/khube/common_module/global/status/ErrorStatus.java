@@ -1,5 +1,8 @@
 package khube.common_module.global.status;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorStatus {
     USER_NOT_FOUND("U001", "User not found"),
     INVALID_ORDER("O001", "Invalid order request"),
@@ -13,7 +16,4 @@ public enum ErrorStatus {
         this.code = code;
         this.message = message;
     }
-
-    public String getCode() { return code; }
-    public String getMessage() { return message; }
 }
